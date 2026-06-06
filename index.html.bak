@@ -6,12 +6,6 @@
 <title>NutriSnap — AI Calorie Tracker</title>
 <meta name="description" content="Snap food. Get calories. Beat your goals. Powered by AI.">
 <meta name="theme-color" content="#0a0a0a">
-<link rel="manifest" href="/manifest.json">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="NutriSnap">
-<meta name="mobile-web-app-capable" content="yes">
-<link rel="apple-touch-icon" href="/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -581,152 +575,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 
   </div>
 
-    <!-- HELP PAGE -->
-    <div class="app-page" id="page-help">
-      <div class="page-head">
-        <div class="page-title">How to use</div>
-        <span class="pill pill-green">NutriSnap Guide</span>
-      </div>
-
-      <!-- Quick start -->
-      <div style="margin:0 16px 12px;background:var(--green-dim);border:1px solid rgba(0,230,118,.2);border-radius:var(--radius-lg);padding:18px">
-        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px">🚀 Quick start in 3 steps</div>
-        <div style="font-size:13px;color:var(--text);line-height:1.8">
-          1️⃣ Complete onboarding to set your calorie goal<br>
-          2️⃣ Tap the <strong style="color:var(--green)">green + button</strong> to log food<br>
-          3️⃣ Check your ring and ask the Coach anytime
-        </div>
-      </div>
-
-      <!-- Home -->
-      <div style="margin:0 16px 6px;font-size:11px;font-weight:600;letter-spacing:.6px;color:var(--subtle);text-transform:uppercase">🏠 Home screen</div>
-      <div class="card" style="margin-bottom:8px">
-        <div style="padding:4px 0">
-          <div class="help-item">
-            <div class="help-icon">🔵</div>
-            <div><div class="help-title">Calorie ring</div><div class="help-body">Big circle showing calories eaten vs your daily goal. Green = good, amber = nearly there, red = over limit.</div></div>
-          </div>
-          <div class="help-item">
-            <div class="help-icon">💊</div>
-            <div><div class="help-title">Macro tiles</div><div class="help-body">4 tiles below the ring showing Protein, Carbs, Fat, Fiber. Each has a mini bar filling up as you log food.</div></div>
-          </div>
-          <div class="help-item">
-            <div class="help-icon">💧</div>
-            <div><div class="help-title">Water tracker</div><div class="help-body">Tap each 💧 cup to log water intake. Goal is 8 cups a day. Tap a filled cup to undo it.</div></div>
-          </div>
-          <div class="help-item">
-            <div class="help-icon">🔥</div>
-            <div><div class="help-title">Streak badge</div><div class="help-body">Top right. Counts days in a row you've logged food. Miss a day and it resets to 0 — keep it going!</div></div>
-          </div>
-          <div class="help-item" style="border-bottom:none">
-            <div class="help-icon">🍽️</div>
-            <div><div class="help-title">Today's log</div><div class="help-body">All meals logged today, newest first. Tap the ✕ on any entry to delete it. Purple "AI" badge means it was scanned by AI.</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Add food -->
-      <div style="margin:8px 16px 6px;font-size:11px;font-weight:600;letter-spacing:.6px;color:var(--subtle);text-transform:uppercase">➕ Adding food (green + button)</div>
-      <div class="card" style="margin-bottom:8px">
-        <div style="padding:4px 0">
-          <div class="help-item">
-            <div class="help-icon">📷</div>
-            <div>
-              <div class="help-title">AI photo scan <span style="background:var(--green-dim);color:var(--green);font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:4px">⭐ best</span></div>
-              <div class="help-body">Take a photo or upload any food image. AI identifies the dish and estimates calories, protein, carbs, fat. Review the result then tap "+ Add to Log".</div>
-            </div>
-          </div>
-          <div class="help-item">
-            <div class="help-icon">✏️</div>
-            <div><div class="help-title">Manual entry</div><div class="help-body">Scroll down in the + panel. Type food name, calories, and macros yourself. Good for known meals.</div></div>
-          </div>
-          <div class="help-item" style="border-bottom:none">
-            <div class="help-icon">⚡</div>
-            <div><div class="help-title">Quick presets</div><div class="help-body">Chips for common foods — Banana, Dal, Roti, Idli, Samosa, Paneer, Chicken, Rice and more. One tap to add instantly.</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Insights -->
-      <div style="margin:8px 16px 6px;font-size:11px;font-weight:600;letter-spacing:.6px;color:var(--subtle);text-transform:uppercase">📊 Insights tab</div>
-      <div class="card" style="margin-bottom:8px">
-        <div style="padding:4px 0">
-          <div class="help-item">
-            <div class="help-icon">📈</div>
-            <div><div class="help-title">Weekly calorie chart</div><div class="help-body">Bar chart of your calories for each day this week. Today's bar is highlighted in green.</div></div>
-          </div>
-          <div class="help-item">
-            <div class="help-icon">🥧</div>
-            <div><div class="help-title">Macro donut</div><div class="help-body">Pie chart showing how today's calories are split between protein, carbs and fat.</div></div>
-          </div>
-          <div class="help-item" style="border-bottom:none">
-            <div class="help-icon">💡</div>
-            <div><div class="help-title">Smart insights</div><div class="help-body">Auto-generated tips based on your data — low protein warnings, streak celebrations, hydration reminders and more.</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Coach -->
-      <div style="margin:8px 16px 6px;font-size:11px;font-weight:600;letter-spacing:.6px;color:var(--subtle);text-transform:uppercase">🤖 Coach tab</div>
-      <div class="card" style="margin-bottom:8px">
-        <div style="padding:4px 0">
-          <div class="help-item">
-            <div class="help-icon">💬</div>
-            <div>
-              <div class="help-title">AI nutrition coach <span style="background:var(--blue-dim);color:var(--blue);font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:4px">unique</span></div>
-              <div class="help-body">Chat with Claude AI. It knows everything you've logged today and gives personalised advice in real time.</div>
-            </div>
-          </div>
-          <div class="help-item">
-            <div class="help-icon">⚡</div>
-            <div><div class="help-title">Suggestion chips</div><div class="help-body">Tap chips like "Am I on track?", "What should I eat next?" or "How's my protein?" for instant answers.</div></div>
-          </div>
-          <div class="help-item" style="border-bottom:none">
-            <div class="help-icon">💡</div>
-            <div><div class="help-title">What to ask</div><div class="help-body">Try: "Give me a 500 kcal meal idea", "Analyse my week", "Am I eating too much fat?", "What's a good snack for muscle gain?"</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Profile -->
-      <div style="margin:8px 16px 6px;font-size:11px;font-weight:600;letter-spacing:.6px;color:var(--subtle);text-transform:uppercase">👤 Profile tab</div>
-      <div class="card" style="margin-bottom:8px">
-        <div style="padding:4px 0">
-          <div class="help-item">
-            <div class="help-icon">🎯</div>
-            <div><div class="help-title">Edit goals</div><div class="help-body">Change your daily calorie, protein and carb targets anytime. Tap the number and type a new value.</div></div>
-          </div>
-          <div class="help-item" style="border-bottom:none">
-            <div class="help-icon">🔄</div>
-            <div><div class="help-title">Restart onboarding</div><div class="help-body">Redo the full setup — recalculates your BMR and gives you a fresh plan based on new weight or goals.</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tips -->
-      <div style="margin:8px 16px 6px;font-size:11px;font-weight:600;letter-spacing:.6px;color:var(--subtle);text-transform:uppercase">💡 Good to know</div>
-      <div class="card" style="margin-bottom:8px">
-        <div style="padding:4px 0">
-          <div class="help-item">
-            <div class="help-icon">📱</div>
-            <div><div class="help-title">Install as app</div><div class="help-body">iPhone: tap Share → "Add to Home Screen". Android: tap ⋮ → "Add to Home Screen". Opens fullscreen like a native app!</div></div>
-          </div>
-          <div class="help-item">
-            <div class="help-icon">💾</div>
-            <div><div class="help-title">Auto-save</div><div class="help-body">Everything saves automatically in your browser. Your streak and goals persist across days. Each day starts fresh.</div></div>
-          </div>
-          <div class="help-item" style="border-bottom:none">
-            <div class="help-icon">🌙</div>
-            <div><div class="help-title">Dark mode only</div><div class="help-body">NutriSnap uses a pure black OLED-friendly dark theme — easy on your eyes and battery at night.</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin:8px 16px 24px;background:var(--amber-dim);border:1px solid rgba(255,179,0,.2);border-radius:var(--radius);padding:14px 16px;font-size:13px;color:var(--amber);line-height:1.6">
-        🔑 The AI features (photo scan + coach) use your Anthropic API credits. Each food scan costs roughly ₹0.10–0.20. Your $5 credit = ~500+ scans.
-      </div>
-    </div>
-
   <!-- Bottom nav -->
   <nav class="bottom-nav">
     <button class="nav-item active" onclick="showPage('home',this)" id="nav-home">
@@ -745,23 +593,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
       <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       <span class="nav-label">Profile</span>
     </button>
-    <button class="nav-item" onclick="showPage('help',this)" id="nav-help">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <span class="nav-label">Help</span>
-    </button>
   </nav>
-</div>
-
-
-<!-- Install banner -->
-<div id="install-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:999;background:#1a1a1a;border-bottom:1px solid #2a2a2a;padding:12px 16px;align-items:center;gap:12px">
-  <div style="font-size:22px">📲</div>
-  <div style="flex:1">
-    <div style="font-size:13px;font-weight:600;color:#f0f0f0">Install NutriSnap</div>
-    <div style="font-size:11px;color:#888">Add to home screen for the best experience</div>
-  </div>
-  <button onclick="installApp()" style="background:#00e676;color:#000;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">Install</button>
-  <button onclick="dismissInstall()" style="background:none;border:none;color:#555;font-size:18px;cursor:pointer;padding:4px">✕</button>
 </div>
 
 <!-- FAB -->
@@ -1406,36 +1238,6 @@ function toast(msg){
     document.getElementById('onboarding').classList.add('active');
   }
 })();
-</script>
-
-<script>
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('/sw.js').catch(()=>{});
-  });
-}
-// PWA install prompt
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt',(e)=>{
-  e.preventDefault();
-  deferredPrompt=e;
-  const banner=document.getElementById('install-banner');
-  if(banner)banner.style.display='flex';
-});
-function installApp(){
-  if(deferredPrompt){
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(()=>{
-      deferredPrompt=null;
-      const banner=document.getElementById('install-banner');
-      if(banner)banner.style.display='none';
-    });
-  }
-}
-function dismissInstall(){
-  const banner=document.getElementById('install-banner');
-  if(banner)banner.style.display='none';
-}
 </script>
 </body>
 </html>
