@@ -12,6 +12,7 @@
 <meta name="apple-mobile-web-app-title" content="NutriSnap">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="apple-touch-icon" href="/icon-192.png">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -511,6 +512,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
       <div class="profile-hero">
         <div class="profile-avatar">🧑</div>
         <div class="profile-name" id="profile-name-display">You</div>
+      <div id="premium-badge" style="display:none;background:var(--amber-dim);color:var(--amber);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:600;margin-top:6px;width:fit-content;margin-left:auto;margin-right:auto"></div>
         <div class="profile-sub" id="profile-goal-display">Loading your plan...</div>
       </div>
 
@@ -547,6 +549,23 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
         </div>
       </div>
 
+      <div class="profile-section" id="upgrade-section">
+        <div class="profile-section-title">Subscription</div>
+        <div id="free-plan-box" style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:6px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:14px;font-weight:600">Free Plan</span>
+            <span style="font-size:12px;color:var(--muted)">3 scans/day</span>
+          </div>
+          <button onclick="showPaywall()" style="width:100%;padding:11px;background:var(--green);color:#000;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif">⭐ Upgrade to Premium — ₹99/month</button>
+        </div>
+        <div id="premium-plan-box" style="display:none;background:var(--green-dim);border:1px solid rgba(0,230,118,.2);border-radius:var(--radius);padding:16px;margin-bottom:6px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:14px;font-weight:600;color:var(--green)">⭐ Premium Active</span>
+            <span id="expiry-display" style="font-size:11px;color:var(--muted)"></span>
+          </div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">Unlimited scans · AI Coach · All features</div>
+        </div>
+      </div>
       <div class="profile-section">
         <div class="profile-section-title">Settings</div>
         <div class="profile-item" onclick="toggleDarkMode()">
@@ -764,7 +783,82 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
   <button onclick="dismissInstall()" style="background:none;border:none;color:#555;font-size:18px;cursor:pointer;padding:4px">✕</button>
 </div>
 
+
+<!-- PAYWALL MODAL -->
+<div id="paywall-modal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);align-items:flex-end;justify-content:center">
+  <div style="background:#111;border-radius:28px 28px 0 0;width:100%;max-width:480px;padding:28px 24px max(24px,env(safe-area-inset-bottom));animation:slideUp .3s ease">
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:36px;margin-bottom:10px">🚀</div>
+      <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:#f0f0f0;margin-bottom:6px">Unlock Premium</div>
+      <div style="font-size:14px;color:#888;line-height:1.6">You've used your 3 free scans today.<br>Upgrade for unlimited scans + AI Coach.</div>
+    </div>
+
+    <!-- Features -->
+    <div style="background:#1a1a1a;border-radius:14px;padding:16px;margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #222">
+        <span style="font-size:18px">📷</span>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#f0f0f0">Unlimited AI food scans</div>
+          <div style="font-size:11px;color:#666">Snap any meal, anytime</div>
+        </div>
+        <span style="margin-left:auto;color:#00e676;font-size:14px">✓</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #222">
+        <span style="font-size:18px">🤖</span>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#f0f0f0">AI Nutrition Coach</div>
+          <div style="font-size:11px;color:#666">Personalised daily advice</div>
+        </div>
+        <span style="margin-left:auto;color:#00e676;font-size:14px">✓</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #222">
+        <span style="font-size:18px">📊</span>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#f0f0f0">Weekly insights & charts</div>
+          <div style="font-size:11px;color:#666">Understand your patterns</div>
+        </div>
+        <span style="margin-left:auto;color:#00e676;font-size:14px">✓</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:8px 0">
+        <span style="font-size:18px">🎯</span>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#f0f0f0">Custom macro goals</div>
+          <div style="font-size:11px;color:#666">BMR-based personalised plan</div>
+        </div>
+        <span style="margin-left:auto;color:#00e676;font-size:14px">✓</span>
+      </div>
+    </div>
+
+    <!-- Pricing options -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+      <div id="plan-monthly" onclick="selectPlan('monthly')" style="border:2px solid #2a2a2a;border-radius:12px;padding:14px;text-align:center;cursor:pointer;transition:all .2s">
+        <div style="font-size:11px;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Monthly</div>
+        <div style="font-size:22px;font-weight:700;color:#f0f0f0">₹99</div>
+        <div style="font-size:11px;color:#666">per month</div>
+      </div>
+      <div id="plan-yearly" onclick="selectPlan('yearly')" style="border:2px solid #00e676;border-radius:12px;padding:14px;text-align:center;cursor:pointer;position:relative;background:rgba(0,230,118,.06)">
+        <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#00e676;color:#000;font-size:10px;font-weight:700;padding:2px 10px;border-radius:20px;white-space:nowrap">SAVE 33%</div>
+        <div style="font-size:11px;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Yearly</div>
+        <div style="font-size:22px;font-weight:700;color:#f0f0f0">₹799</div>
+        <div style="font-size:11px;color:#666">per year</div>
+      </div>
+    </div>
+
+    <!-- Pay button -->
+    <button onclick="startPayment()" style="width:100%;padding:16px;background:#00e676;color:#000;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;margin-bottom:10px;transition:all .15s">
+      Start 7-day free trial →
+    </button>
+    <button onclick="closePaywall()" style="width:100%;padding:12px;background:none;border:none;color:#555;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif">
+      Maybe later (3 scans/day free)
+    </button>
+    <div style="text-align:center;font-size:11px;color:#444;margin-top:8px">Cancel anytime · Secure payment via Razorpay</div>
+  </div>
+</div>
+
 <!-- FAB -->
+<div id="scan-counter-wrap" style="display:none;position:fixed;bottom:calc(140px + max(0px,env(safe-area-inset-bottom)));right:16px;z-index:39">
+  <div id="scan-counter" style="font-size:11px;color:var(--muted);background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:4px 10px;white-space:nowrap;text-align:center"></div>
+</div>
 <button class="fab" id="fab" onclick="openScan()" style="display:none">
   <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
 </button>
@@ -985,6 +1079,7 @@ function launchApp(){
 // ══════════════════════════════════════════════════════════
 function initApp(){
   checkNewDay();
+  setTimeout(updatePremiumBadge, 100);
   buildWaterCups();
   buildPresetChips();
   updateGreeting();
@@ -1178,6 +1273,12 @@ function clearScan(e){
 }
 async function runScan(){
   if(!scanB64)return;
+  // Check scan limit
+  if(!canScan()){
+    showPaywall();
+    return;
+  }
+  incrementScan();
   const btn=document.getElementById('scan-ai-btn');
   const lbl=document.getElementById('scan-ai-label');
   btn.disabled=true;
@@ -1392,6 +1493,159 @@ function toast(msg){
   toastTimer=setTimeout(()=>t.classList.remove('show'),2500);
 }
 
+
+// ══════════════════════════════════════════════════════════
+//  PAYWALL & SUBSCRIPTION
+// ══════════════════════════════════════════════════════════
+// REPLACE THIS WITH YOUR ACTUAL RAZORPAY KEY
+const RAZORPAY_KEY = 'rzp_test_YourKeyHere';
+// REPLACE WITH YOUR PLAN IDs FROM RAZORPAY DASHBOARD
+const PLANS = {
+  monthly: { id: 'plan_monthly_id_here', amount: 9900, period: 'monthly' },
+  yearly:  { id: 'plan_yearly_id_here',  amount: 79900, period: 'yearly' }
+};
+const FREE_SCAN_LIMIT = 3;
+let selectedPlan = 'yearly';
+
+function isPremium() {
+  const exp = S.premiumExpiry;
+  if (!exp) return false;
+  return new Date(exp) > new Date();
+}
+
+function getScansToday() {
+  const today = new Date().toDateString();
+  if (S.scanDate !== today) { S.scanScansToday = 0; S.scanDate = today; }
+  return S.scanScansToday || 0;
+}
+
+function incrementScan() {
+  const today = new Date().toDateString();
+  if (S.scanDate !== today) { S.scanScansToday = 0; S.scanDate = today; }
+  S.scanScansToday = (S.scanScansToday || 0) + 1;
+  save();
+}
+
+function canScan() {
+  if (isPremium()) return true;
+  return getScansToday() < FREE_SCAN_LIMIT;
+}
+
+function showPaywall() {
+  const modal = document.getElementById('paywall-modal');
+  modal.style.display = 'flex';
+  selectPlan('yearly');
+}
+
+function closePaywall() {
+  document.getElementById('paywall-modal').style.display = 'none';
+}
+
+function selectPlan(plan) {
+  selectedPlan = plan;
+  document.getElementById('plan-monthly').style.borderColor = plan === 'monthly' ? '#00e676' : '#2a2a2a';
+  document.getElementById('plan-monthly').style.background = plan === 'monthly' ? 'rgba(0,230,118,.06)' : 'transparent';
+  document.getElementById('plan-yearly').style.borderColor = plan === 'yearly' ? '#00e676' : '#2a2a2a';
+  document.getElementById('plan-yearly').style.background = plan === 'yearly' ? 'rgba(0,230,118,.06)' : 'transparent';
+}
+
+function startPayment() {
+  const plan = PLANS[selectedPlan];
+  
+  // If Razorpay key not set, show instructions
+  if (RAZORPAY_KEY === 'rzp_test_YourKeyHere') {
+    toast('Add your Razorpay key to enable payments');
+    return;
+  }
+
+  const options = {
+    key: RAZORPAY_KEY,
+    subscription_id: plan.id,
+    name: 'NutriSnap',
+    description: selectedPlan === 'monthly' ? 'Premium Monthly — ₹99/month' : 'Premium Yearly — ₹799/year',
+    image: '/icon-192.png',
+    prefill: { name: S.name || '', email: '', contact: '' },
+    theme: { color: '#00e676' },
+    handler: function(response) {
+      // Payment successful
+      onPaymentSuccess(response, selectedPlan);
+    },
+    modal: {
+      ondismiss: function() { toast('Payment cancelled'); }
+    }
+  };
+
+  try {
+    const rzp = new Razorpay(options);
+    rzp.open();
+  } catch(e) {
+    // Fallback: one-time payment if subscription not set up
+    const optionsOnetime = {
+      key: RAZORPAY_KEY,
+      amount: plan.amount,
+      currency: 'INR',
+      name: 'NutriSnap Premium',
+      description: selectedPlan === 'monthly' ? '₹99/month' : '₹799/year',
+      image: '/icon-192.png',
+      prefill: { name: S.name || '' },
+      theme: { color: '#00e676' },
+      handler: function(response) { onPaymentSuccess(response, selectedPlan); }
+    };
+    const rzp2 = new Razorpay(optionsOnetime);
+    rzp2.open();
+  }
+}
+
+function onPaymentSuccess(response, plan) {
+  // Set premium expiry
+  const expiry = new Date();
+  if (plan === 'monthly') expiry.setMonth(expiry.getMonth() + 1);
+  else expiry.setFullYear(expiry.getFullYear() + 1);
+  
+  S.premiumExpiry = expiry.toISOString();
+  S.premiumPlan = plan;
+  S.paymentId = response.razorpay_payment_id;
+  save();
+  
+  closePaywall();
+  updatePremiumBadge();
+  toast('🎉 Welcome to Premium! Unlimited scans unlocked.');
+}
+
+function updatePremiumBadge() {
+  const badge = document.getElementById('premium-badge');
+  const freeBox = document.getElementById('free-plan-box');
+  const premBox = document.getElementById('premium-plan-box');
+  const expDisplay = document.getElementById('expiry-display');
+  if (isPremium()) {
+    if (badge) { badge.style.display = 'flex'; badge.textContent = '⭐ Premium'; }
+    if (freeBox) freeBox.style.display = 'none';
+    if (premBox) premBox.style.display = 'block';
+    if (expDisplay && S.premiumExpiry) {
+      const d = new Date(S.premiumExpiry);
+      expDisplay.textContent = 'Expires ' + d.toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'});
+    }
+  } else {
+    if (badge) badge.style.display = 'none';
+    if (freeBox) freeBox.style.display = 'block';
+    if (premBox) premBox.style.display = 'none';
+  }
+  updateScanCounter();
+}
+
+function updateScanCounter() {
+  const el = document.getElementById('scan-counter');
+  if (!el) return;
+  if (isPremium()) {
+    el.textContent = '∞ scans';
+    el.style.color = 'var(--amber)';
+  } else {
+    const remaining = Math.max(0, FREE_SCAN_LIMIT - getScansToday());
+    el.textContent = remaining + ' scans left today';
+    el.style.color = remaining === 0 ? 'var(--red)' : 'var(--muted)';
+  }
+}
+
 // ══════════════════════════════════════════════════════════
 //  BOOT
 // ══════════════════════════════════════════════════════════
@@ -1401,6 +1655,7 @@ function toast(msg){
     document.getElementById('onboarding').style.display='none';
     document.getElementById('app-shell').classList.add('active');
     document.getElementById('fab').style.display='flex';
+    document.getElementById('scan-counter-wrap').style.display='block';
     setTimeout(initApp,0);
   } else {
     document.getElementById('onboarding').classList.add('active');
