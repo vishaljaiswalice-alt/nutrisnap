@@ -9,19 +9,19 @@ export default async function handler(req) {
   if (!imageBase64) return new Response(JSON.stringify({ error: 'Missing imageBase64' }), { status: 400, headers: CORS });
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return new Response(JSON.stringify({ error: 'API key not configured' }), { status: 500, headers: CORS });
-  const prompt = 'You are a nutrition expert. Analyse this food image and respond ONLY with a valid JSON object with these exact keys: name, calories, protein, carbs, fat, fiber, notes. No markdown, no backticks, just the JSON.';
+  const prompt = 'You are a nutrition expert. Look at this food image and respond ONLY with a JSON object with these keys: name (string), calories (number), protein (number), carbs (number), fat (number), fiber (number), notes (string). No markdown, no extra text, just the JSON object.';
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 400, messages: [{ role: 'user', content: [{ type: 'image', source: { type: 'base64', media_type: mediaType, data: imageBase64 } }, { type: 'text', text: prompt }] }] })
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 500, messages: [{ role: 'user', content: [{ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: imageBase64 } }, { type: 'text', text: prompt }] }] })
     });
-    if (!response.ok) return new Response(JSON.stringify({ error: 'AI service error' }), { status: 502, headers: CORS });
     const data = await response.json();
+    if (!response.ok) return new Response(JSON.stringify({ error: data.error?.message || 'AI service error' }), { status: 502, headers: CORS });
     const text = data.content.map(b => b.text || '').join('').trim().replace(/```json|```/g, '').trim();
     const parsed = JSON.parse(text);
     return new Response(JSON.stringify(parsed), { status: 200, headers: CORS });
   } catch (err) {
-    return new Response(JSON.stringify({ error: 'Failed to analyse image' }), { status: 500, headers: CORS });
+    return new Response(JSON.stringify({ error: err.message || 'Failed to analyse' }), { status: 500, headers: CORS });
   }
 }
